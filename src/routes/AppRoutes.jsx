@@ -3,11 +3,14 @@ import { Home } from "../pages/home/home";
 import { ProfessorsPage } from "../pages/Professors/ProfessorsPage";
 import { StudentPage } from "../pages/students/StudentPage";
 import { StudentCard } from "../pages/students/components/StudentCard";
+import { Header } from "../pages/header/Header";
 
 export const AppRoutes = () => {
   return (
     
     <div style={{backgroundColor: "#fafafa"}}>
+
+      <Header />
 
         <Routes>
             <Route path="/" element={<Home />} />
