@@ -2,9 +2,7 @@ import { Modal } from "react-bootstrap";
 import { deleteStudentById } from "../hooks/deleteStudent";
 
 export const ModalDeleteStudent = ({ show, handleClose, student }) => {
-
-
-    const fetchData = async (id) => {
+    const handleDelete = async (id) => {
       try {
         const data = await deleteStudentById(student.id);
         if (data.status) {
@@ -14,8 +12,8 @@ export const ModalDeleteStudent = ({ show, handleClose, student }) => {
         }
       } catch (error) {
         console.error("Error obteniendo los datos:", error);
-      } finally {
-          setIsLoading(false)
+      } finally{
+        handleClose();
       }
     };
 
@@ -37,7 +35,7 @@ export const ModalDeleteStudent = ({ show, handleClose, student }) => {
             >
               CERRAR
             </button>
-            <button type="button" className="btn btn-danger" onClick={fetchData}>ELIMINAR</button>
+            <button type="button" className="btn btn-danger" onClick={handleDelete}>ELIMINAR</button>
             </Modal.Footer>
         </Modal>
       
