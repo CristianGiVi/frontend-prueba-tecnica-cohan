@@ -2,8 +2,12 @@ import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 
 import { getStudentById } from "../hooks/getStudentById";
+import { ModalEditAddress } from "./ModalEditAddress";
+
+import { editStudent } from "../hooks/editStudent";
 
 export const StudentCard = () => {
+  const [showModalEditAddres, setShowModalEditAddres] = useState(false);
   const [studentData, setStudentData] = useState({});
   const [name, setName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
@@ -42,11 +46,25 @@ export const StudentCard = () => {
       setAverageMark(studentData.averageMark || 0);
     }
   }, [studentData]);
-  
 
-  const handleSave = () => {
-    console.log("Datos actualizados:", { name, phoneNumber, emailAddress, studentNumber, averageMark });
-  };
+  const handleSave = async () => {
+        try {
+          const updatedStudent = {
+            name,
+            phoneNumber,
+            emailAddress,
+            studentNumber,
+            averageMark,
+            address: {"id": studentData.address.id}
+          };
+          let data = await editStudent(updatedStudent, id);
+          if (!data.status) {
+            console.error("Error obteniendo los datos:", data.content);
+          } 
+        } catch (error) {
+          console.error("Error obteniendo los datos:", error);
+        }
+  }
 
   if (isLoading) {
     return <div className="text-center mt-5">Cargando datos del estudiante...</div>;
@@ -90,6 +108,11 @@ export const StudentCard = () => {
             />
           </div>
           <div className="mb-3">
+            <button className="btn btn-secondary"
+              onClick={() => {setShowModalEditAddres(true)}}
+            >EDITAR DIRECCION</button>
+          </div>
+          <div className="mb-3">
             <label htmlFor="studentNumber" className="form-label">
               Numero de Estudiante
             </label>
@@ -106,10 +129,18 @@ export const StudentCard = () => {
             />
           </div>
           <button type="button" className="btn btn-success w-100" onClick={handleSave}>
-            Guardar Cambios
+            GUARDAR CAMBIOS
           </button>
         </form>
       </div>
+
+      {/* Modal para editar la direccion */}
+      <ModalEditAddress
+        show={showModalEditAddres}
+        handleClose={() => setShowModalEditAddres(false)}
+        Address={studentData.address}
+      />
+
     </div>
   );
 };
