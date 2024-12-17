@@ -9,7 +9,7 @@ export const ModalEditAddress = ({ show, handleClose, Address }) => {
   const [state, setState] = useState(Address.state);
   const [postalCode, setPostalCode] = useState(Address.postalCode);
 
-  const fetchData = async () => {
+  const handleSave = async () => {
     try {
       const addressData = {
         street,
@@ -22,11 +22,11 @@ export const ModalEditAddress = ({ show, handleClose, Address }) => {
       let data = await editAddress(addressData, Address.id);
       if (!data.status) {
         console.error("Error obteniendo los datos:", data.content);
-      } 
+      }
     } catch (error) {
       console.error("Error obteniendo los datos:", error);
-    } finally{
-        handleClose()
+    } finally {
+      handleClose();
     }
   };
 
@@ -37,7 +37,13 @@ export const ModalEditAddress = ({ show, handleClose, Address }) => {
       </Modal.Header>
 
       <Modal.Body>
-        <form className="p-4">
+        <form
+          className="p-4"
+          onSubmit={(e) => {
+            e.preventDefault();
+            handleSave();
+          }}
+        >
           <div className="mb-3">
             <label htmlFor="country" className="form-label">
               Pais
@@ -47,6 +53,7 @@ export const ModalEditAddress = ({ show, handleClose, Address }) => {
               className="form-control"
               id="country"
               value={country}
+              required
               onChange={(e) => setCountry(e.target.value)}
             />
           </div>
@@ -60,6 +67,7 @@ export const ModalEditAddress = ({ show, handleClose, Address }) => {
               className="form-control"
               id="state"
               value={state}
+              required
               onChange={(e) => setState(e.target.value)}
             />
           </div>
@@ -73,6 +81,7 @@ export const ModalEditAddress = ({ show, handleClose, Address }) => {
               className="form-control"
               id="city"
               value={city}
+              required
               onChange={(e) => setCity(e.target.value)}
             />
           </div>
@@ -86,6 +95,7 @@ export const ModalEditAddress = ({ show, handleClose, Address }) => {
               className="form-control"
               id="postalCode"
               value={postalCode}
+              required
               onChange={(e) => setPostalCode(e.target.value)}
             />
           </div>
@@ -99,24 +109,25 @@ export const ModalEditAddress = ({ show, handleClose, Address }) => {
               className="form-control"
               id="street"
               value={street}
+              required
               onChange={(e) => setStreet(e.target.value)}
             />
           </div>
+
+          <div className="d-flex justify-content-around">
+            <button
+              type="button"
+              className="btn btn-secondary "
+              onClick={handleClose}
+            >
+              CERRAR
+            </button>
+            <button type="submit" className="btn btn-warning">
+              EDITAR
+            </button>
+          </div>
         </form>
       </Modal.Body>
-
-      <Modal.Footer>
-        <button
-          type="button"
-          className="btn btn-secondary "
-          onClick={handleClose}
-        >
-          CERRAR
-        </button>
-        <button type="submit" className="btn btn-warning" onClick={fetchData}>
-          EDITAR
-        </button>
-      </Modal.Footer>
     </Modal>
   );
 };
