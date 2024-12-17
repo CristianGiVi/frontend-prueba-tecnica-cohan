@@ -1,4 +1,4 @@
-export const deleteStudent = async (id) => {
+export const deleteStudentById = async (id) => {
     try {
       const url = `http://localhost:8080/student/delete-student/${id}`;
       const options = {
