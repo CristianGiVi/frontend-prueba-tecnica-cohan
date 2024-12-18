@@ -95,7 +95,7 @@ export const ModalCreateStudent = ({ show, handleClose, refreshList }) => {
                 Numero de celular
               </label>
               <input
-                type="text"
+                type="number"
                 className="form-control"
                 id="phoneNumber"
                 value={phoneNumber}
@@ -111,7 +111,7 @@ export const ModalCreateStudent = ({ show, handleClose, refreshList }) => {
                 Correo
               </label>
               <input
-                type="text"
+                type="email"
                 className="form-control"
                 id="emailAddress"
                 value={emailAddress}
@@ -201,7 +201,7 @@ export const ModalCreateStudent = ({ show, handleClose, refreshList }) => {
                 Codigo Postal
               </label>
               <input
-                type="text"
+                type="number"
                 className="form-control"
                 id="postalCode"
                 value={postalCode}

@@ -93,7 +93,7 @@ export const ModalCreateProfessor = ({ show, handleClose, refreshList }) => {
                     Numero de celular
                   </label>
                   <input
-                    type="text"
+                    type="number"
                     className="form-control"
                     id="phoneNumber"
                     value={phoneNumber}
@@ -109,7 +109,7 @@ export const ModalCreateProfessor = ({ show, handleClose, refreshList }) => {
                     Correo
                   </label>
                   <input
-                    type="text"
+                    type="email"
                     className="form-control"
                     id="emailAddress"
                     value={emailAddress}
@@ -128,7 +128,6 @@ export const ModalCreateProfessor = ({ show, handleClose, refreshList }) => {
                     value={salary}
                     required
                     min="0"
-                    max="5"
                     step="0.1"
                     onChange={(e) => setSalary(e.target.value)}
                   />
@@ -186,7 +185,7 @@ export const ModalCreateProfessor = ({ show, handleClose, refreshList }) => {
                     Codigo Postal
                   </label>
                   <input
-                    type="text"
+                    type="number"
                     className="form-control"
                     id="postalCode"
                     value={postalCode}

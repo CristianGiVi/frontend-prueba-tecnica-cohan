@@ -93,7 +93,7 @@ export const ModalEditAddress = ({ show, handleClose, Address }) => {
               Codigo Postal
             </label>
             <input
-              type="text"
+              type="number"
               className="form-control"
               id="postalCode"
               value={postalCode}

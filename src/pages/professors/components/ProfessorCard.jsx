@@ -118,7 +118,7 @@ export const ProfessorCard = () => {
                 Celular
               </label>
               <input
-                type="text"
+                type="number"
                 className="form-control"
                 id="phoneNumber"
                 value={phoneNumber}

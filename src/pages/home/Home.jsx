@@ -13,7 +13,7 @@ export const Home = () => {
           <div className="d-grid gap-2 mb-3 w-50">
             <button
               type="button"
-              className="btn btn-primary btn-lg"
+              className="btn btn btn-info btn-lg"
               onClick={() => navigate("/students-page")}
             >
               ESTUDIANTES
@@ -22,7 +22,7 @@ export const Home = () => {
           <div className="d-grid gap-2 w-50">
             <button
               type="button"
-              className="btn btn-primary btn-lg"
+              className="btn btn btn-info btn-lg"
               onClick={() => navigate("/professors-page")}
             >
               PROFESORES
