@@ -18,7 +18,7 @@ export const StudentCard = () => {
 
   const { id } = useParams();
 
-  const fetchData = async () => {
+  const getStudentData = async () => {
     try {
       const data = await getStudentById(id);
       if (data.status) {
@@ -34,7 +34,7 @@ export const StudentCard = () => {
   };
 
   useEffect(() => {
-    fetchData();
+    getStudentData();
   }, []);
 
   useEffect(() => {
@@ -60,9 +60,13 @@ export const StudentCard = () => {
       let data = await editStudent(updatedStudent, id);
       if (!data.status) {
         console.error("Error obteniendo los datos:", data.content);
+        alert("Hubo un error al actualizar los datos");
       }
+      alert("Datos actualizados correctamente.");
+      getStudentData()
     } catch (error) {
       console.error("Error obteniendo los datos:", error);
+      alert("Hubo un error al actualizar los datos");
     }
   };
 
@@ -141,6 +145,7 @@ export const StudentCard = () => {
           <div className="mb-3">
             <button
               className="btn btn-secondary"
+              type="button"
               onClick={() => {
                 setShowModalEditAddres(true);
               }}
@@ -173,6 +178,7 @@ export const StudentCard = () => {
               min="0"
               max="5"
               required
+              step="0.1"
               onChange={(e) => setAverageMark(e.target.value)}
             />
           </div>

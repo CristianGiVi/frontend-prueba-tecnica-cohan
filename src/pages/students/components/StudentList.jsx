@@ -10,7 +10,7 @@ export const StudentList = () => {
   const [students, setStudents] = useState([]);
   const [currentStudent, setCurrentStudent] = useState({});
 
-  const fetchData = async () => {
+  const getAllStudents = async () => {
     try {
       const data = await getStudentList();
       if (data.status) {
@@ -24,7 +24,7 @@ export const StudentList = () => {
   };
 
   useEffect(() => {
-    fetchData();
+    getAllStudents();
   }, []);
 
   return (
@@ -88,6 +88,7 @@ export const StudentList = () => {
         show={showModalDeleteStudent}
         handleClose={() => setShowModalDeleteStudent(false)}
         student={currentStudent}
+        refreshList={getAllStudents}
       />
     </div>
   );

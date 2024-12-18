@@ -22,9 +22,12 @@ export const ModalEditAddress = ({ show, handleClose, Address }) => {
       let data = await editAddress(addressData, Address.id);
       if (!data.status) {
         console.error("Error obteniendo los datos:", data.content);
+        alert("Hubo un error al actualizar la direccion");
       }
+      alert("Direccion actualizada con exito");
     } catch (error) {
       console.error("Error obteniendo los datos:", error);
+      alert("Hubo un error al actualizar la direccion");
     } finally {
       handleClose();
     }

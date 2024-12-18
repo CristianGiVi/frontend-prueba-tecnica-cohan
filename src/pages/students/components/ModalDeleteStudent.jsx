@@ -1,17 +1,20 @@
 import { Modal } from "react-bootstrap";
 import { deleteStudentById } from "../hooks/deleteStudent";
 
-export const ModalDeleteStudent = ({ show, handleClose, student }) => {
+export const ModalDeleteStudent = ({ show, handleClose, student, refreshList }) => {
     const handleDelete = async (id) => {
       try {
         const data = await deleteStudentById(student.id);
         if (data.status) {
-          console.log(data);
+          alert("Estudiante eliminado con exito");
+          refreshList()
         } else {
           console.error("Error obteniendo los datos:", data.content);
+          alert("Hubo un error al eliminar el estudiante");
         }
       } catch (error) {
         console.error("Error obteniendo los datos:", error);
+        alert("Hubo un error al eliminar el estudiante");
       } finally{
         handleClose();
       }
