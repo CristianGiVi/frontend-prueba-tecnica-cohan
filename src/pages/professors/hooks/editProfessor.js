@@ -1,11 +1,11 @@
-export const editStudent = async (updatedStudent, id) => {
-    const URL = `http://localhost:8080/student/edit-student/${id}`;
+export const editProfessor = async (updatedProfessor, id) => {
+    const URL = `http://localhost:8080/professor/edit-professor/${id}`;
     const options = {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(updatedStudent),
+        body: JSON.stringify(updatedProfessor),
     };
 
     try {

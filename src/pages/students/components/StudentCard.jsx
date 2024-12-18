@@ -59,11 +59,12 @@ export const StudentCard = () => {
       };
       let data = await editStudent(updatedStudent, id);
       if (!data.status) {
-        console.error("Error obteniendo los datos:", data.content);
-        alert("Hubo un error al actualizar los datos");
+        alert(data.content.message);
+      } else {
+        alert("Datos actualizados correctamente.");
+        getStudentData()
       }
-      alert("Datos actualizados correctamente.");
-      getStudentData()
+
     } catch (error) {
       console.error("Error obteniendo los datos:", error);
       alert("Hubo un error al actualizar los datos");

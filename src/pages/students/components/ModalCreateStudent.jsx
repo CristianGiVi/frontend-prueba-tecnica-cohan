@@ -6,7 +6,7 @@ import { createStudent } from "../hooks/createStudent";
 import { deleteAddressById } from "../hooks/DeleteAddressById";
 
 
-export const ModalCreateStudent = ({ show, handleClose }) => {
+export const ModalCreateStudent = ({ show, handleClose, refreshList }) => {
   const [name, setName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [emailAddress, setEmailAddress] = useState("");
@@ -43,18 +43,22 @@ export const ModalCreateStudent = ({ show, handleClose }) => {
           let dataStudent = await createStudent(studentData);
           if (!dataStudent.status) {
             await deleteAddressById(dataAddress.content.address.id);
-            console.error("Error obteniendo los datos del estudiante:", dataStudent.content);
+            alert(dataStudent.content.message);
+          } else {
+            alert("Estudiante creado con éxito.");
+            refreshList();
+            handleClose();
           }
 
-          handleClose();
 
       } else {
-        console.error("Error obteniendo los datos de la direccion:", dataAddress.content);
+        alert(dataAddress.content.message);
       }
 
       
     } catch (error) {
       console.error("Error obteniendo los datos:", error);
+      alert("Hubo un error al crear el estudiante.");
     }
   };
 

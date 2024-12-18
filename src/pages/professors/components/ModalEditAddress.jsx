@@ -29,7 +29,7 @@ export const ModalEditAddress = ({ show, handleClose, Address }) => {
       
     } catch (error) {
       alert("Hubo un error al actualizar la direccion");
-    } 
+    }
   };
 
   return (

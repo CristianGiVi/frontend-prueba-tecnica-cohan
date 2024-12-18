@@ -14,7 +14,7 @@ export const Header = () => {
                 className="btn btn-outline-light mx-2"
                 onClick={() => navigate("/")}
               >
-                Home
+                HOME
               </button>
             </li>
             <li className="nav-item">
@@ -23,7 +23,7 @@ export const Header = () => {
                 className="btn btn-outline-light mx-2"
                 onClick={() => navigate("/students-page")}
               >
-                Estudiantes
+                ESTUDIANTES
               </button>
             </li>
             <li className="nav-item">
@@ -32,7 +32,7 @@ export const Header = () => {
                 className="btn btn-outline-light mx-2"
                 onClick={() => navigate("/professors-page")}
               >
-                Profesores
+                PROFESORES
               </button>
             </li>
           </ul>

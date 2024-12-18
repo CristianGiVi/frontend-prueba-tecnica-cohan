@@ -1,20 +1,20 @@
 import { useState, useEffect, forwardRef, useImperativeHandle } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { getStudentList } from "../hooks/getStudentList";
-import { ModalDeleteStudent } from "./ModalDeleteStudent";
+import { getProfessors } from "../hooks/getProfessors";
+import { ModalDeleteProfessor } from "./ModalDeleteProfessor";
 
-export const StudentList = forwardRef((props, ref) => {
+export const ProfessorList = forwardRef((props, ref) => {
   const navigate = useNavigate();
-  const [showModalDeleteStudent, setShowModalDeleteStudent] = useState(false);
-  const [students, setStudents] = useState([]);
-  const [currentStudent, setCurrentStudent] = useState({});
+  const [showModalDeleteProfessor, setShowModalDeleteProfessor] = useState(false);
+  const [professors, setProfessors] = useState([]);
+  const [currentProfessor, setCurrentProfessor] = useState({});
 
-  const getAllStudents = async () => {
+  const getAllProfessors = async () => {
     try {
-      const data = await getStudentList();
+      const data = await getProfessors();
       if (data.status) {
-        setStudents(data.content);
+        setProfessors(data.content);
       } else {
         console.error("Error obteniendo los datos:", data.content);
       }
@@ -24,11 +24,11 @@ export const StudentList = forwardRef((props, ref) => {
   };
 
   useEffect(() => {
-    getAllStudents();
+    getAllProfessors();
   }, []);
 
   useImperativeHandle(ref, () => ({
-    fetchData: getAllStudents,
+    fetchData: getAllProfessors,
   }));
 
   return (
@@ -39,23 +39,21 @@ export const StudentList = forwardRef((props, ref) => {
             <th scope="col">Nombre</th>
             <th scope="col">Celular</th>
             <th scope="col">Correo</th>
-            <th scope="col">#Estudiante</th>
-            <th scope="col">Nota promedio</th>
+            <th scope="col">Salario (COP)</th>
             <th scope="col">Ciudad</th>
             <th scope="col">Direccion</th>
             <th>Acciones</th>
           </tr>
         </thead>
         <tbody>
-          {students.map((student) => (
-            <tr key={student.id}>
-              <td>{student.name}</td>
-              <td>{student.phoneNumber}</td>
-              <td>{student.emailAddress}</td>
-              <td>{student.studentNumber}</td>
-              <td>{student.averageMark}</td>
-              <td>{student.address.city}</td>
-              <td>{student.address.street}</td>
+          {professors.map((professor) => (
+            <tr key={professor.id}>
+              <td>{professor.name}</td>
+              <td>{professor.phoneNumber}</td>
+              <td>{professor.emailAddress}</td>
+              <td>{professor.salary}</td>
+              <td>{professor.address.city}</td>
+              <td>{professor.address.street}</td>
               <td>
                 <div className="container">
                   <div className="row justify-content-center align-items-center">
@@ -64,7 +62,7 @@ export const StudentList = forwardRef((props, ref) => {
                         type="button"
                         className="btn btn-info"
                         onClick={() =>
-                          navigate(`/students-details/${student.id}`)
+                          navigate(`/professor-details/${professor.id}`)
                         }
                       >
                         EDITAR
@@ -74,7 +72,7 @@ export const StudentList = forwardRef((props, ref) => {
                       <button
                         type="button"
                         className="btn btn-danger"
-                        onClick={() => {setShowModalDeleteStudent(true); setCurrentStudent(student)}}
+                        onClick={() => {setShowModalDeleteProfessor(true); setCurrentProfessor(professor)}}
                       >
                         ELIMINAR
                       </button>
@@ -88,12 +86,13 @@ export const StudentList = forwardRef((props, ref) => {
       </table>
 
       {/* Modal para eliminar estudiante */}
-      <ModalDeleteStudent
-        show={showModalDeleteStudent}
-        handleClose={() => setShowModalDeleteStudent(false)}
-        student={currentStudent}
-        refreshList={getAllStudents}
+      <ModalDeleteProfessor
+        show={showModalDeleteProfessor}
+        handleClose={() => setShowModalDeleteProfessor(false)}
+        professor={currentProfessor}
+        refreshList={getAllProfessors}
       />
     </div>
   );
 });
+
